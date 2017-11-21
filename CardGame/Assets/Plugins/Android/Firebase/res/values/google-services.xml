@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+  <string name="firebase_database_url" translatable="false">https://cardgame-v1.firebaseio.com</string>
+  <string name="gcm_defaultSenderId" translatable="false">402353792942</string>
+  <string name="google_storage_bucket" translatable="false">cardgame-v1.appspot.com</string>
+  <string name="project_id" translatable="false">cardgame-v1</string>
+  <string name="google_api_key" translatable="false">AIzaSyAIf0yEeor7P2m8DzFG5s-M-d0TkD382eU</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAIf0yEeor7P2m8DzFG5s-M-d0TkD382eU</string>
+  <string name="google_app_id" translatable="false">1:402353792942:android:e44e89a4abbd78d8</string>
+  <string name="default_web_client_id" translatable="false">402353792942-9h5094ldtr8bq4b6ggfidhgpoqgt0565.apps.googleusercontent.com</string>
+</resources>

@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: e844054a3b5ca8f46acbb78f1990a4ef
+timeCreated: 1508091111
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Deftone
+  fontNames:
+  - Deftone
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

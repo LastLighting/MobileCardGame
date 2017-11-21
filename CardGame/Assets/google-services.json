@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "402353792942",
+    "firebase_url": "https://cardgame-v1.firebaseio.com",
+    "project_id": "cardgame-v1",
+    "storage_bucket": "cardgame-v1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:402353792942:android:e44e89a4abbd78d8",
+        "android_client_info": {
+          "package_name": "com.cardstudio.cardgame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "402353792942-9h5094ldtr8bq4b6ggfidhgpoqgt0565.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIf0yEeor7P2m8DzFG5s-M-d0TkD382eU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
