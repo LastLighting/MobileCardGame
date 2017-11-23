@@ -1,0 +1,92 @@
+fileFormatVersion: 2
+guid: f37ff7d8974b71e47bf67abb2a9045bc
+timeCreated: 1511362393
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName: {}
+  externalObjects: {}
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites: []
+    outline: []
+    physicsShape: []
+  spritePackingTag: 
+  userData: '{"fileNaming":"LayerNameOnly","groupMode":"ParentOnly","PackingTag":null,"TargetDirectory":"","AutoImport":false,"DefaultAlignment":"Center","DefaultPivot":{"x":0.5,"y":0.5},"ScaleFactor":"Full","DocAlignment":"Center","DocPivot":{"x":0.5,"y":0.5},"DocRoot":{"name":"DOCUMENT_ROOT","path":null,"indexId":[-1],"import":false,"useDefaults":false,"Alignment":"Center","Pivot":{"x":0.0,"y":0.0},"ScaleFactor":"Full","Childs":[{"name":"\u041f\u0440\u044f\u043c\u043e\u0443\u0433\u043e\u043b\u044c\u043d\u0438\u043a
+    5","path":"\u041f\u0440\u044f\u043c\u043e\u0443\u0433\u043e\u043b\u044c\u043d\u0438\u043a
+    5","indexId":[0],"import":true,"useDefaults":true,"Alignment":"Center","Pivot":{"x":0.5,"y":0.5},"ScaleFactor":"Full","Childs":[]},{"name":"           \u0417\u0430\u0440\u043e\u0434\u044b\u0448","path":"           \u0417\u0430\u0440\u043e\u0434\u044b\u0448","indexId":[1],"import":true,"useDefaults":true,"Alignment":"Center","Pivot":{"x":0.5,"y":0.5},"ScaleFactor":"Full","Childs":[]},{"name":"\u041c\u0435\u0441\u0442\u043e
+    \u043e\u0447\u043a\u043e\u0432","path":"\u041c\u0435\u0441\u0442\u043e \u043e\u0447\u043a\u043e\u0432","indexId":[2],"import":true,"useDefaults":true,"Alignment":"Center","Pivot":{"x":0.5,"y":0.5},"ScaleFactor":"Full","Childs":[]},{"name":"\u041c\u0435\u0441\u0442\u043e
+    \u043e\u0447\u043a\u043e\u0432 \u043a\u043e\u043f\u0438\u044f","path":"\u041c\u0435\u0441\u0442\u043e
+    \u043e\u0447\u043a\u043e\u0432 \u043a\u043e\u043f\u0438\u044f","indexId":[3],"import":true,"useDefaults":true,"Alignment":"Center","Pivot":{"x":0.5,"y":0.5},"ScaleFactor":"Full","Childs":[]},{"name":"2","path":"2","indexId":[4],"import":true,"useDefaults":true,"Alignment":"Center","Pivot":{"x":0.5,"y":0.5},"ScaleFactor":"Full","Childs":[]},{"name":"15","path":"15","indexId":[5],"import":true,"useDefaults":true,"Alignment":"Center","Pivot":{"x":0.5,"y":0.5},"ScaleFactor":"Full","Childs":[]},{"name":"\u0420\u0430\u0437\u043c\u0435\u0449\u0435\u043d\u0438\u0435:
+    \u0432\u043e\u0437\u0432\u0440\u0430\u0449\u0430\u0435\u0442\u0441\u044f  \u043d\u0430
+    \u0412\u0430\u0448\u0443 \u0441\u0442\u043e\u0440\u043e\u043d\u0443. \u0412 \u043d\u0430\u0447\u0430\u043b\u0435
+    \u0441\u043b\u0435\u0434\u0443\u044e\u0449\u0435\u0433\u043e ","path":"\u0420\u0430\u0437\u043c\u0435\u0449\u0435\u043d\u0438\u0435:
+    \u0432\u043e\u0437\u0432\u0440\u0430\u0449\u0430\u0435\u0442\u0441\u044f  \u043d\u0430
+    \u0412\u0430\u0448\u0443 \u0441\u0442\u043e\u0440\u043e\u043d\u0443. \u0412 \u043d\u0430\u0447\u0430\u043b\u0435
+    \u0441\u043b\u0435\u0434\u0443\u044e\u0449\u0435\u0433\u043e ","indexId":[6],"import":true,"useDefaults":true,"Alignment":"Center","Pivot":{"x":0.5,"y":0.5},"ScaleFactor":"Full","Childs":[]},{"name":"\u0421\u043b\u043e\u0439
+    15","path":"\u0421\u043b\u043e\u0439 15","indexId":[7],"import":true,"useDefaults":true,"Alignment":"Center","Pivot":{"x":0.5,"y":0.5},"ScaleFactor":"Full","Childs":[]},{"name":"\u0417\u043d\u0430\u043a
+    \u043e\u0431\u043e\u0440\u043e\u043d\u044b","path":"\u0417\u043d\u0430\u043a \u043e\u0431\u043e\u0440\u043e\u043d\u044b","indexId":[8],"import":true,"useDefaults":true,"Alignment":"Center","Pivot":{"x":0.5,"y":0.5},"ScaleFactor":"Full","Childs":[]},{"name":"\u0421\u043b\u043e\u0439
+    11","path":"\u0421\u043b\u043e\u0439 11","indexId":[9],"import":true,"useDefaults":true,"Alignment":"Center","Pivot":{"x":0.5,"y":0.5},"ScaleFactor":"Full","Childs":[]},{"name":"\u0421\u043b\u043e\u0439
+    12","path":"\u0421\u043b\u043e\u0439 12","indexId":[10],"import":true,"useDefaults":true,"Alignment":"Center","Pivot":{"x":0.5,"y":0.5},"ScaleFactor":"Full","Childs":[]},{"name":"\u0421\u043b\u043e\u0439
+    13","path":"\u0421\u043b\u043e\u0439 13","indexId":[11],"import":true,"useDefaults":true,"Alignment":"Center","Pivot":{"x":0.5,"y":0.5},"ScaleFactor":"Full","Childs":[]}]}}'
+  assetBundleName: 
+  assetBundleVariant: 

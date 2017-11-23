@@ -18,9 +18,9 @@ public class LoginButton : MonoBehaviour {
 
     private IEnumerator changeColor()
     {
-        gameObject.GetComponentInChildren<SpriteRenderer>().color = new Color32(123, 65, 193, 255);
-        gameObject.GetComponentInChildren<Text>().color = new Color32(123, 65, 193, 255);
-        yield return new WaitForSeconds(1);
+        gameObject.GetComponentInChildren<SpriteRenderer>().color = new Color32(0, 0, 0, 255);
+        gameObject.GetComponentInChildren<Text>().color = new Color32(0, 0, 0, 255);
+        yield return new WaitForSeconds(0.3f);
         gameObject.GetComponentInChildren<SpriteRenderer>().color = new Color32(163, 163, 163, 255);
         gameObject.GetComponentInChildren<Text>().color = Color.white;
     }
