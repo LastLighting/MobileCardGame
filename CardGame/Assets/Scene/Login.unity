@@ -127,7 +127,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &72247453
 Transform:
   m_ObjectHideFlags: 0
@@ -262,7 +262,7 @@ GameObject:
   - component: {fileID: 120588402}
   - component: {fileID: 120588401}
   m_Layer: 0
-  m_Name: login (1)
+  m_Name: acceptButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -296,11 +296,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 120588399}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cf10762dc1018c4babf44492515b57b, type: 3}
+  m_Script: {fileID: 11500000, guid: 9948e74bf1db0584d896774eb0f66093, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  emailInput: {fileID: 1811305315}
-  passwordInput: {fileID: 1266561414}
+  modal: {fileID: 72247452}
+  blur: {fileID: 1858288669}
 --- !u!61 &120588402
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -555,6 +555,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cf10762dc1018c4babf44492515b57b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loginText: {fileID: 0}
+  modal: {fileID: 0}
+  blur: {fileID: 0}
   emailInput: {fileID: 1811305315}
   passwordInput: {fileID: 1266561414}
 --- !u!61 &502973889
@@ -667,6 +670,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emailInput: {fileID: 1811305315}
   passwordInput: {fileID: 1266561414}
+  singUpText: {fileID: 1134209626}
+  modal: {fileID: 72247452}
+  blur: {fileID: 1858288669}
 --- !u!61 &558567195
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2204,7 +2210,18 @@ MonoBehaviour:
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1811305318}
+        m_MethodName: endColor
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.InputField+SubmitEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_OnValueChanged:
@@ -2412,12 +2429,12 @@ GameObject:
   - component: {fileID: 1858288672}
   - component: {fileID: 1858288671}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Blur
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1858288670
 RectTransform:
   m_ObjectHideFlags: 0
