@@ -1,10 +1,8 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using System.Text;
 using Firebase.Auth;
 using UnityEngine;
 using UnityEngine.Networking;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Collection : MonoBehaviour {
@@ -38,13 +36,13 @@ public class Collection : MonoBehaviour {
             position.x = transform.position.x - startTransformX;
             position.y = position.y - transformY;
         }
-        /*StartCoroutine(GetText());*/
+        StartCoroutine(GetText());
 
     }
 
-    /*IEnumerator GetText()
+    IEnumerator GetText()
     {
-        RegistrationUserForm user = new RegistrationUserForm();
+        User user = new User();
         user.email = "test@mail.com";
         user.password = "123q";
         user.username = "test";
@@ -55,5 +53,14 @@ public class Collection : MonoBehaviour {
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
         yield return request.Send(); 
-    }*/
+        if(request.isNetworkError) {
+            Debug.Log(request.error);
+        }
+        else
+        {
+            User[] users = JsonHelper.FromJson<User>(request.downloadHandler.text);
+            Debug.Log(users[0].password);
+            Debug.Log(users[1].password);
+        }
+    }
 }

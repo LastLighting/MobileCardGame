@@ -1,9 +1,8 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using Firebase.Auth;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System;
 
 public class SingUpButton : MonoBehaviour {
 	
@@ -11,6 +10,9 @@ public class SingUpButton : MonoBehaviour {
 	
 	public InputField emailInput;
 	public InputField passwordInput;
+    public Text singUpText;
+    public GameObject modal;
+    public GameObject blur;
 	
 	void Start () {
 		firebaseAuth = FirebaseAuth.DefaultInstance;
@@ -47,20 +49,35 @@ public class SingUpButton : MonoBehaviour {
 		{
 			if (task.IsCanceled)
 			{
-				Debug.LogError("CreateUserWithEmailAndPasswordAsync was canceled.");
+                singUpText.text = "CreateUserWithEmailAndPasswordAsync was canceled.";
+                blur.SetActive(true);
+                modal.SetActive(true);
+                Debug.LogError("CreateUserWithEmailAndPasswordAsync was canceled.");
 				return;
-			}
-			if (task.IsFaulted)
+			}     
+            if (task.IsFaulted)
 			{
-				Debug.LogError("CreateUserWithEmailAndPasswordAsync error: " + task.Exception);
-				/*if (task.Exception.InnerExceptions.Count > 0)
-					UpdateErrorMessage(task.Exception.InnerExceptions[0].Message);
-				return;*/
-			}
+                if (task.Exception.InnerExceptions.Count > 0)
+                    if(task.Exception.InnerExceptions[0].Message.Equals("The email address is already in use by another account."))
+                    {
+                        singUpText.text = "Данный аккаунт уже занят";
+                    }
+                    else
+                    {
+                        singUpText.text = "" + task.Exception.InnerExceptions[0].Message;
+                    }           
+                blur.SetActive(true);
+                modal.SetActive(true);
+                Debug.LogError("CreateUserWithEmailAndPasswordAsync error: " + task.Exception);        
+                return ;
+            
+            }
 
 			FirebaseUser newUser = task.Result; // Firebase user has been created.
-			Debug.LogFormat("Firebase user created successfully: {0} ({1})", newUser.DisplayName, newUser.UserId);
-			/*UpdateErrorMessage("Signup Success");*/
+            singUpText.text = "Зарегистрирован аккаунт " + newUser.DisplayName;
+            blur.SetActive(true);
+            modal.SetActive(true);
+            Debug.LogFormat("Firebase user created successfully: {0} ({1})", newUser.DisplayName, newUser.UserId);
 		});
 	}
 }
