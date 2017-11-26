@@ -8,7 +8,9 @@ using UnityEngine.UI;
 public class LoginButton : MonoBehaviour {
     
     public FirebaseAuth firebaseAuth;
-
+    public Text loginText;
+    public GameObject modal;
+    public GameObject blur;
     public InputField emailInput;
     public InputField passwordInput;
  
@@ -41,6 +43,9 @@ public class LoginButton : MonoBehaviour {
         {
             if (task.IsCanceled || task.IsFaulted)
             {
+                loginText.text = "Ошибка входа";
+                blur.SetActive(true);
+                modal.SetActive(true);
                 return;
             }
             else
