@@ -12,7 +12,7 @@ public class Collection : MonoBehaviour {
     public float startTransformY;
     public float transformX;
     public float transformY;
-    
+    public string[] ids;
     private FirebaseAuth firebaseAuth;
 
     public InputField emailInput;
@@ -27,10 +27,18 @@ public class Collection : MonoBehaviour {
         position.z = 0;
         for (int y = 0; y < 2; y++)
         {
-            for (int x = 0; x < 4; x++)
+            for (int x = 0; x < 3; x++)
             {
                 Card newCard = Instantiate(card, position, card.transform.rotation) as Card;
-                newCard.changeSprite(Random.Range(0,3));
+                newCard.Id = ids[y*3+x];
+                newCard.Strength = Random.Range(1, 20);
+                newCard.changeStrength(newCard.Strength);
+                newCard.sprites[0] = Resources.Load("sprites/Cards/SmallSize/" + newCard.Id, typeof(Sprite)) as Sprite;
+                newCard.sprites[1] = Resources.Load("sprites/Cards/FullSize/" + newCard.Id, typeof(Sprite)) as Sprite;
+                newCard.changeSprite(0);
+                newCard.transform.position = position;
+                newCard.transform.localScale = new Vector3(1.3F, 1.3F, 0);
+                   
                 position.x = position.x + transformX;
             }
             position.x = transform.position.x - startTransformX;

@@ -21,9 +21,11 @@ public class Menu : MonoBehaviour {
     Vector3 defaultVector1;
     Vector3 defaultVector2;
 	public Text successLogin;
+    public GameObject mainTheme;
 
     void Start()
     {
+        mainTheme = GameObject.Find("MainMusic");
         defaultVector1 = transform1.position;
 	    var user = PlayerPrefs.GetString("LoginUser", "Unknown");
 	    successLogin.text = "Привет, наш альфа-тестер, " + user;
@@ -34,7 +36,6 @@ public class Menu : MonoBehaviour {
 	}
 
     public void collection() {
-
         SceneManager.LoadScene("Collection");
     }
 
@@ -82,5 +83,12 @@ public class Menu : MonoBehaviour {
             settingsButton.transform.position = Vector3.Lerp(transform1.position, defaultVector1, (Time.timeSinceLevelLoad - startTime) * settingsSpeed);
         }
         
+    }
+
+    public void setMusic(float value)
+    {
+        Settings.music = value;
+        AudioSource audio = mainTheme.GetComponent<AudioSource>();
+        audio.volume = value;
     }
 }

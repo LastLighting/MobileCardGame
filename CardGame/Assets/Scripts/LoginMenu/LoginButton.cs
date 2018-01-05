@@ -13,7 +13,8 @@ public class LoginButton : MonoBehaviour {
     public GameObject blur;
     public InputField emailInput;
     public InputField passwordInput;
- 
+    public GameObject mainTheme;
+
     void Start () {
         firebaseAuth = FirebaseAuth.DefaultInstance;
     }
@@ -39,11 +40,31 @@ public class LoginButton : MonoBehaviour {
     
     public void login(string email, string password)
     {
+        if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+        {
+            loginText.text = "Поля почта или пароль пусты";
+            blur.SetActive(true);
+            modal.SetActive(true);
+            return;
+        }
+
         firebaseAuth.SignInWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
         {
             if (task.IsCanceled || task.IsFaulted)
             {
-                loginText.text = "Ошибка входа";
+                string err = task.Exception.InnerExceptions[0].Message;
+                
+                if (err.Contains("There is no user record"))
+                {
+                    loginText.text = "Неправильная почта или пароль";
+                }
+                else
+                if (err.Contains("The email address is badly formatted."))
+                {
+                    loginText.text = "Неправильный адрес электронной почты";
+                }
+                else
+                    loginText.text = "" + task.Exception.InnerExceptions[0].Message;
                 blur.SetActive(true);
                 modal.SetActive(true);
                 return;
@@ -53,6 +74,7 @@ public class LoginButton : MonoBehaviour {
                 FirebaseUser user = task.Result;
                 PlayerPrefs.SetString("LoginUser", user != null ? user.Email : "Unknown");
                 SceneManager.LoadScene("MainMenu");
+                GameObject.DontDestroyOnLoad(mainTheme);
             }
         });
     }
