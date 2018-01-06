@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,6 +24,8 @@ public class Collection : MonoBehaviour {
     public GameObject singUpButton;
     
     void Start () {
+        StartCoroutine(getCollection());
+        StartCoroutine(getUserCollection());
         Vector3 position = transform.position;
         position.y = position.y + startTransformY;
         position.x = position.x - startTransformX;
@@ -48,15 +49,35 @@ public class Collection : MonoBehaviour {
             position.x = transform.position.x - startTransformX;
             position.y = position.y - transformY;
         }
-        StartCoroutine(getCollection());
+    }
+    
+    IEnumerator getCollection()
+    {
+        UnityWebRequest request = new UnityWebRequest("http://localhost:8080/collection/cards", "POST");
+        request.downloadHandler = new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+        yield return request.Send();
+        if (request.isError)
+        {
+            Debug.Log(request.error);
+        }
+        else
+        {
+            string jsonString = JsonHelper.fixJson(request.downloadHandler.text);        
+            CardBean[] collection = JsonHelper.FromJson<CardBean>(jsonString);
+            foreach (CardBean card in collection)
+            {
+                Debug.Log(card.name);
+            }
+        }
     }
 
-    IEnumerator getCollection()
+    IEnumerator getUserCollection()
     {
         User user = new User();
         user.email = PlayerPrefs.GetString("LoginUser", "Unknown");;
         string jsonToServer = JsonUtility.ToJson(user);
-        UnityWebRequest request = new UnityWebRequest("http://localhost:8080/collection/cards", "POST");
+        UnityWebRequest request = new UnityWebRequest("http://localhost:8080/collection/userCards", "POST");
         byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonToServer);
         request.uploadHandler = new UploadHandlerRaw(bodyRaw);
         request.downloadHandler = new DownloadHandlerBuffer();
@@ -69,7 +90,24 @@ public class Collection : MonoBehaviour {
         {
             string jsonString = JsonHelper.fixJson(request.downloadHandler.text);        
             CardBean[] cards = JsonHelper.FromJson<CardBean>(jsonString);
-            Debug.Log("");
+            Dictionary<CardBean, int> playerCards = new Dictionary<CardBean, int>();
+
+            Dictionary<CardBean, int> notIniqCards = cards
+                .GroupBy(n => n, (n, m) => new {Key = n, Cnt = m.Count()})
+                .Where(n => n.Cnt > 1)
+                .ToDictionary(n => n.Key, n => n.Cnt);
+
+            Dictionary<CardBean, int> uniqCards = cards
+                .GroupBy(n => n, (n, m) => new { Key = n, Cnt = m.Count() })
+                .Where(n => n.Cnt == 1)
+                .ToDictionary(n => n.Key, n => n.Cnt);
+            
+            playerCards = uniqCards.Union(notIniqCards).ToDictionary(n => n.Key, n => n.Value);
+            
+            foreach (KeyValuePair<CardBean, int> keyValue in playerCards)
+            {
+                Debug.Log(keyValue.Key.name + " - " + keyValue.Value);
+            }
         }
     }
 }
