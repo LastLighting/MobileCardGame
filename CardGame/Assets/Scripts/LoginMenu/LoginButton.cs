@@ -68,9 +68,7 @@ public class LoginButton : MonoBehaviour {
                 blur.SetActive(true);
                 modal.SetActive(true);
                 return;
-            }
-            else
-            {
+            } else {
                 FirebaseUser user = task.Result;
                 PlayerPrefs.SetString("LoginUser", user != null ? user.Email : "Unknown");
                 SceneManager.LoadScene("MainMenu");
