@@ -1,9 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Firebase.Auth;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class Collection : MonoBehaviour {
 
@@ -44,31 +48,28 @@ public class Collection : MonoBehaviour {
             position.x = transform.position.x - startTransformX;
             position.y = position.y - transformY;
         }
-        StartCoroutine(GetText());
-
+        StartCoroutine(getCollection());
     }
 
-    IEnumerator GetText()
+    IEnumerator getCollection()
     {
         User user = new User();
-        user.email = "test@mail.com";
-        user.password = "123q";
-        user.username = "test";
+        user.email = PlayerPrefs.GetString("LoginUser", "Unknown");;
         string jsonToServer = JsonUtility.ToJson(user);
-        UnityWebRequest request = new UnityWebRequest("http://localhost:8080/user/registration", "POST");
+        UnityWebRequest request = new UnityWebRequest("http://localhost:8080/collection/cards", "POST");
         byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonToServer);
         request.uploadHandler = new UploadHandlerRaw(bodyRaw);
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
         yield return request.Send(); 
-        if(request.isNetworkError) {
+        if(request.isError) {
             Debug.Log(request.error);
         }
         else
         {
-            User[] users = JsonHelper.FromJson<User>(request.downloadHandler.text);
-            Debug.Log(users[0].password);
-            Debug.Log(users[1].password);
+            string jsonString = JsonHelper.fixJson(request.downloadHandler.text);        
+            CardBean[] cards = JsonHelper.FromJson<CardBean>(jsonString);
+            Debug.Log("");
         }
     }
 }

@@ -3,6 +3,8 @@ using Firebase.Auth;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using System.Text;
+using UnityEngine.Networking;
 
 public class SingUpButton : MonoBehaviour {
 	
@@ -80,14 +82,30 @@ public class SingUpButton : MonoBehaviour {
                 modal.SetActive(true);
                 Debug.LogError("CreateUserWithEmailAndPasswordAsync error: " + task.Exception);        
                 return ;
-            
             }
 
-			FirebaseUser newUser = task.Result; // Firebase user has been created.
-            singUpText.text = "Зарегистрирован аккаунт " + newUser.DisplayName;
+			FirebaseUser newUser = task.Result;
+            singUpText.text = "Зарегистрирован аккаунт " + newUser.Email;
+			User user = new User();
+			user.email = newUser.Email;
+			user.uuid = newUser.UserId;
+			StartCoroutine(serverRegistration(user));
             blur.SetActive(true);
-            modal.SetActive(true);
-            Debug.LogFormat("Firebase user created successfully: {0} ({1})", newUser.DisplayName, newUser.UserId);
+            modal.SetActive(true);			
 		});
+	}
+	
+	IEnumerator serverRegistration(User user)
+	{
+		string jsonToServer = JsonUtility.ToJson(user);
+		UnityWebRequest request = new UnityWebRequest("http://localhost:8080/user/registration", "POST");
+		byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonToServer);
+		request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+		request.downloadHandler = new DownloadHandlerBuffer();
+		request.SetRequestHeader("Content-Type", "application/json");
+		yield return request.Send(); 
+		if(request.isError) {
+			singUpText.text = "Регистрация отменена. Ошибка сервера";
+		}
 	}
 }
