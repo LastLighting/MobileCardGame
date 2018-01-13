@@ -9,7 +9,7 @@ public class CardBean : IEqualityComparer<CardBean>, IEquatable<CardBean>
     public string id;
     public string name;
     public int strength;
-    
+
     public bool Equals(CardBean x, CardBean y)
     {
         throw new NotImplementedException();
