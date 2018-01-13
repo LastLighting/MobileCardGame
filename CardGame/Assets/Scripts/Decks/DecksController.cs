@@ -19,6 +19,7 @@ public class DecksController : MonoBehaviour
         {
             Deck newDeck = Instantiate(deck, position, deck.transform.rotation) as Deck;
             Card card = new Card();
+            
             newDeck.Leader = card;
             newDeck.Leader.Id = ids[x];
             newDeck.Leader.Strength = Random.Range(1, 20);
@@ -28,6 +29,7 @@ public class DecksController : MonoBehaviour
             newDeck.changeSprite(0);
             newDeck.transform.position = position;
             newDeck.transform.localScale = new Vector3(1.3F, 1.3F, 0);
+            newDeck.transform.parent = GameObject.Find("Content").transform;
 
             position.x = position.x + transformX;
         }
