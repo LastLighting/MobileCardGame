@@ -6,7 +6,6 @@ public class CardInDeckBuild : MonoBehaviour {
 
     public ItemList itemList;
     private GameObject list;
-    GameObject gfff;
 
     public void OnMouseUp()
     {

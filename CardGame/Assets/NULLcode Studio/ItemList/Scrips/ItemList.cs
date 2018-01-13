@@ -65,26 +65,42 @@ public class ItemList : MonoBehaviour {
 		vPos = scroll.verticalNormalizedPosition; // запоминаем позицию скролла
 		int j = 0;
 		ItemButton item = null;
-		foreach(RectTransform b in buttons)
-		{
-			item = b.GetComponent<ItemButton>();
-			if(item.id == id) break; // находим нужный элемент
-			j++;
-		}
-		string title = item.mainButtonText.text; // сохраняем заголовок
-        string index = item.id; // сохраняем id
-		Destroy(item.gameObject); // удаляем этот элемент из списка
-		buttons.RemoveAt(j); // удаляем этот элемент из массива
-		curY = 0;
-		size--; // минус один элемент
-		RectContent(); // пересчитываем размеры окна
-		foreach(RectTransform b in buttons) // сдвигаем элементы
-		{
-			b.anchoredPosition = new Vector2(e_Pos.x, e_Pos.y - curY);
-			curY += delta.y;
-		}
-		scroll.verticalNormalizedPosition = vPos; // возвращаем позицию скролла
-		ButtonRemoved(index, title); // вывод конечной информации
+        bool find = false;
+        foreach (RectTransform b in buttons)
+        {
+            item = b.GetComponent<ItemButton>();
+            if (item.id == id)
+            {
+                if (item.count.text == "2")
+                {
+                    item.count.text = null;
+                    find = true;
+                }                      
+            };
+        }
+        if (!find)
+        {
+            foreach (RectTransform b in buttons)
+            {
+                item = b.GetComponent<ItemButton>();
+                if (item.id == id) break; // находим нужный элемент
+                j++;
+            }
+            string title = item.mainButtonText.text; // сохраняем заголовок
+            string index = item.id; // сохраняем id
+            Destroy(item.gameObject); // удаляем этот элемент из списка
+            buttons.RemoveAt(j); // удаляем этот элемент из массива
+            curY = 0;
+            size--; // минус один элемент
+            RectContent(); // пересчитываем размеры окна
+            foreach (RectTransform b in buttons) // сдвигаем элементы
+            {
+                b.anchoredPosition = new Vector2(e_Pos.x, e_Pos.y - curY);
+                curY += delta.y;
+            }
+            scroll.verticalNormalizedPosition = vPos; // возвращаем позицию скролла
+            ButtonRemoved(index, title); // вывод конечной информации
+        }   
 	}
 
 	void SetMainButton(Button button, string value) // настройка функций при нажатии на главную кнопку
@@ -103,34 +119,41 @@ public class ItemList : MonoBehaviour {
 	// resetScrollbar - сбросить или нет, позицию скролла
 	public void AddToList(string id, string text, bool resetScrollbar)
 	{
+        bool find = false;
         ItemButton item = null;
         foreach (RectTransform b in buttons)
         {
             item = b.GetComponent<ItemButton>();
             if (item.id == id)
             {
-                item.count.text = "2";
+                if (item.count.text != "2")
+                {
+                    item.count.text = "2";
+                }
+                else
+                {
+
+                }
+                find = true;
             };
         }
-        String count = null;
-        Transform transform = gameObject.transform.Find(id);
-        if (transform != null)
+        if (!find)
         {
-            count = transform.Find("Count").GetComponent<Text>().text;
+            String count = null;
+            element.gameObject.SetActive(true);
+            vPos = scroll.verticalNormalizedPosition;
+            curY = 0;
+            size++;
+            RectContent();
+            foreach (RectTransform b in buttons)
+            {
+                b.anchoredPosition = new Vector2(e_Pos.x, e_Pos.y - curY);
+                curY += delta.y;
+            }
+            BuildElement(id, text, count);
+            if (!resetScrollbar) scroll.verticalNormalizedPosition = vPos;
+            element.gameObject.SetActive(false);
         }
-        element.gameObject.SetActive(true);
-		vPos = scroll.verticalNormalizedPosition;
-		curY = 0;
-		size++;
-		RectContent();
-		foreach(RectTransform b in buttons)
-		{
-			b.anchoredPosition = new Vector2(e_Pos.x, e_Pos.y - curY);
-			curY += delta.y;
-		}
-		BuildElement(id, text, count);
-		if(!resetScrollbar) scroll.verticalNormalizedPosition = vPos;
-		element.gameObject.SetActive(false);
 	}
 
 	void BuildElement(string id, string text, string count) // создание нового элемента и настройка параметров
@@ -159,5 +182,25 @@ public class ItemList : MonoBehaviour {
     public static implicit operator ItemList(GameObject v)
     {
         throw new NotImplementedException();
+    }
+    
+    public List<string> GetList()
+    {
+        List<string> list = null;
+        ItemButton item = null;
+        foreach (RectTransform b in buttons)
+        {
+            item = b.GetComponent<ItemButton>();          
+            if (item.count.text == "2")
+            {
+                list.Add(item.id);
+                list.Add(item.id);
+            }
+            else
+            {
+                list.Add(item.id);
+            }          
+        }
+        return list;
     }
 }
