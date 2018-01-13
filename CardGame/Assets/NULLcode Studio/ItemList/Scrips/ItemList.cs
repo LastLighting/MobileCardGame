@@ -184,21 +184,23 @@ public class ItemList : MonoBehaviour {
         throw new NotImplementedException();
     }
     
-    public List<string> GetList()
+    public List<CardBean> GetList()
     {
-        List<string> list = null;
+        List<CardBean> list = new List<CardBean>();
         ItemButton item = null;
         foreach (RectTransform b in buttons)
         {
-            item = b.GetComponent<ItemButton>();          
+	        CardBean card = new CardBean();
+            item = b.GetComponent<ItemButton>();
+	        card.id = item.id;
             if (item.count.text == "2")
             {
-                list.Add(item.id);
-                list.Add(item.id);
+                list.Add(card);
+                list.Add(card);
             }
             else
             {
-                list.Add(item.id);
+                list.Add(card);
             }          
         }
         return list;
