@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class BackButton : MonoBehaviour {
+public class GoToDecks : MonoBehaviour {
 
     private IEnumerator changeColor()
     {
@@ -22,6 +22,6 @@ public class BackButton : MonoBehaviour {
 
     public void OnMouseUp()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene(3);
     }
 }

@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class BackButton : MonoBehaviour {
+public class AddButton : MonoBehaviour {
+   
+    public GameObject modal;
+    public GameObject blur;
 
     private IEnumerator changeColor()
     {
@@ -22,6 +24,7 @@ public class BackButton : MonoBehaviour {
 
     public void OnMouseUp()
     {
-        SceneManager.LoadScene("MainMenu");
+       blur.SetActive(true);
+       modal.SetActive(true);
     }
 }
