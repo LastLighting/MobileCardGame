@@ -104,7 +104,7 @@ public class SingUpButton : MonoBehaviour {
 		request.downloadHandler = new DownloadHandlerBuffer();
 		request.SetRequestHeader("Content-Type", "application/json");
 		yield return request.Send(); 
-		if(request.isError) {
+		if(request.isNetworkError) {
 			singUpText.text = "Регистрация отменена. Ошибка сервера";
 		}
 	}

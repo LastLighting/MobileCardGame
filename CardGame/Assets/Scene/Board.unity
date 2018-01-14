@@ -1273,6 +1273,8 @@ GameObject:
   - component: {fileID: 1222081103}
   - component: {fileID: 1222081102}
   - component: {fileID: 1222081101}
+  - component: {fileID: 1222081105}
+  - component: {fileID: 1222081106}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1343,6 +1345,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1222081105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1222081100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91eaea06f197dca4cadb46271e37947f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SCShader: {fileID: 4800000, guid: c1b0c5c5ba1a04541bef7f52b7401552, type: 3}
+  Vignetting: 0.4
+  VignettingFull: 0
+  VignettingDirt: 0.3
+  VignettingColor: {r: 0, g: 0, b: 0, a: 1}
+--- !u!114 &1222081106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1222081100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0971779da499d914c9a205948f8ee602, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SCShader: {fileID: 4800000, guid: 14156ee2cd4dade4a8da9c29407b9203, type: 3}
+  Fade: 0.15
 --- !u!1 &1226888480
 GameObject:
   m_ObjectHideFlags: 0

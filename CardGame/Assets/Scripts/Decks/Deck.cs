@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Deck : MonoBehaviour {
 
@@ -8,15 +10,16 @@ public class Deck : MonoBehaviour {
     public string Name { get; set; }
     public Card Leader { get; set; }
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public void OnMouseUp()
+    {
+        PlayerPrefs.SetString("DeckName", Name);
+        SceneManager.LoadScene(4);
+    }
+
+    public void changeName(string name)
+    {
+        gameObject.GetComponentInChildren<Text>().text = name;
+    }
 
     public void changeSprite(int i)
     {
