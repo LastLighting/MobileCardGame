@@ -30,7 +30,7 @@ public class Collection : MonoBehaviour
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
         yield return request.Send();
-        if (request.isNetworkError)
+        if (request.isError)
         {
             Debug.Log(request.error);
         }
@@ -85,7 +85,7 @@ public class Collection : MonoBehaviour
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
         yield return request.Send();
-        if (request.isNetworkError)
+        if (request.isError)
         {
             Debug.Log(request.error);
         }

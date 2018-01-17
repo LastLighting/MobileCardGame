@@ -13,7 +13,14 @@ public class Deck : MonoBehaviour {
     public void OnMouseUp()
     {
         PlayerPrefs.SetString("DeckName", Name);
-        SceneManager.LoadScene(4);
+        if (SceneManager.GetActiveScene().name == "Deck")
+        {
+            SceneManager.LoadScene(4);
+        }
+        else if (SceneManager.GetActiveScene().name == "ChoiceDeck")
+        {
+            SceneManager.LoadScene("GameLobby");
+        }
     }
 
     public void changeName(string name)
