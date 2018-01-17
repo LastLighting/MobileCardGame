@@ -49,7 +49,7 @@ public class DecksController : MonoBehaviour
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
         yield return request.Send(); 
-        if(request.isNetworkError) {
+        if(request.isError) {
             // todo обработать
         }
         else
@@ -62,7 +62,7 @@ public class DecksController : MonoBehaviour
     IEnumerator getUserDecks()
     {
         User user = new User();
-        user.email = PlayerPrefs.GetString("LoginUser", "Unknown");
+        user.email = "nikita@mail.ru"; /*PlayerPrefs.GetString("LoginUser", "Unknown");*/
         string jsonToServer = JsonUtility.ToJson(user);
         UnityWebRequest request = new UnityWebRequest("http://localhost:8080/deck/list", "POST");
         byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonToServer);
@@ -70,7 +70,7 @@ public class DecksController : MonoBehaviour
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
         yield return request.Send();
-        if (request.isNetworkError)
+        if (request.isError)
         {
             Debug.Log(request.error);
         }
@@ -113,7 +113,7 @@ public class DecksController : MonoBehaviour
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
         yield return request.Send();
-        if (request.isNetworkError)
+        if (request.isError)
         {
             Debug.Log(request.error);
         }

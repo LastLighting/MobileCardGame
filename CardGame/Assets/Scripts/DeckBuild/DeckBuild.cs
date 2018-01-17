@@ -39,7 +39,7 @@ public class DeckBuild : MonoBehaviour {
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
         yield return request.Send();
-        if (request.isNetworkError)
+        if (request.isError)
         {
             // todo обработать
         }
@@ -83,7 +83,7 @@ public class DeckBuild : MonoBehaviour {
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
         yield return request.Send();
-        if (request.isNetworkError)
+        if (request.isError)
         {
             Debug.Log(request.error);
         }
