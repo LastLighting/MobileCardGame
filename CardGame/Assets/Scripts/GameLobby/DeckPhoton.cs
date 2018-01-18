@@ -32,7 +32,7 @@ public class DeckPhoton : MonoBehaviour {
 			countCardsInDeck = count;
 			pos.y = -pos.y;
 			transform.position = pos;
-			transform.parent = GameObject.Find("Canvas").transform;
+			transform.parent = GameObject.Find("NumberCanvas").transform;
 			gameObject.transform.Find("CountPlace").localPosition = new Vector3(2.2f, -3.1f);
 		}
 	}

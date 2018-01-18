@@ -33,6 +33,9 @@ public class PhotonConnection : Photon.MonoBehaviour
 	void OnJoinedLobby() 
 	{ 
 		PhotonNetwork.JoinOrCreateRoom("testRoom", new RoomOptions(), TypedLobby.Default);
+		PhotonNetwork.playerName = "nikita@mail.ru"; /*PlayerPrefs.GetString("LoginUser", "Unknown");*/
+
+
 		/*var connectedRoom = PhotonNetwork.GetRoomList().ToList().FindAll(f => f.MaxPlayers > f.PlayerCount).FirstOrDefault();
 		RoomOptions roomOptions = new RoomOptions() { IsVisible = true, MaxPlayers = 2 };
 		if (connectedRoom != null)
@@ -48,19 +51,35 @@ public class PhotonConnection : Photon.MonoBehaviour
 			GameObject.Find("Debug").GetComponent<Text>().text = "Комната создана";
 		}*/
 	} 
-
+ 
 	public void OnJoinedRoom() 
 	{ 
 		GameObject mineHand = PhotonNetwork.Instantiate("CardHand", new Vector3(0, -4.1f), transform.rotation, 0);
 		mineHand.gameObject.transform.parent = GameObject.Find("Canvas").transform;
-		mineDeck = PhotonNetwork.Instantiate("Deck", new Vector3(7, -3.2f), transform.rotation, 0);
 		mineHand.name = "CardHand" + PlayerPrefs.GetString("LoginUser", "Unknown");
-		mineDeck.transform.parent = gameObject.transform;
-		DeckBean deckBean = new DeckBean();
+		if ( /*PlayerPrefs.GetString("LoginUser", "Unknown")*/ PhotonNetwork.player.UserId == PhotonNetwork.playerList[0].UserId)
+		{
+			mineHand.GetComponent<HandPhoton>().isAvailable = false;
+		}
+		else
+		{
+			mineHand.GetComponent<HandPhoton>().isAvailable = true;
+		}
+		
+		mineDeck = PhotonNetwork.Instantiate("Deck", new Vector3(7, -3.2f), transform.rotation, 0);
+		mineDeck.transform.parent = GameObject.Find("NumberCanvas").transform;
+		
 		User user = new User();
 		user.email = "nikita@mail.ru"; /*PlayerPrefs.GetString("LoginUser", "Unknown");*/
+		
+		DeckBean deckBean = new DeckBean();
 		deckBean.user = user;
 		deckBean.name = PlayerPrefs.GetString("DeckName", "Unknown");
+		
+		GameObject mineScore = PhotonNetwork.Instantiate("ScoreBox", new Vector3(-7.5f, -1.1f), transform.rotation, 0);
+		mineScore.name = "Score" + PlayerPrefs.GetString("LoginUser", "Unknown");
+		mineScore.transform.parent = GameObject.Find("NumberCanvas").transform;
+		
 		StartCoroutine(getUserDeck(deckBean));
 	} 
 	
@@ -82,6 +101,7 @@ public class PhotonConnection : Photon.MonoBehaviour
 			int count = 0;
 			Card leader = PhotonNetwork.Instantiate("Card", transform.position, transform.rotation, 0).GetComponent<Card>();
 			leader.GetComponent<CardPhoton>().isVisible = true;
+			leader.isLeader = true;
 			leader.Id = deck.leader.id;
 			leader.name = deck.leader.name;
 			leader.Strength = deck.leader.strength;

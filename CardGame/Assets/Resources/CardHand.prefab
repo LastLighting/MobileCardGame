@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114017149279481854}
   - component: {fileID: 114585355796126056}
   - component: {fileID: 114015129951488428}
-  - component: {fileID: 114517262048593442}
+  - component: {fileID: 114623342042556514}
   m_Layer: 5
   m_Name: CardHand
   m_TagString: Untagged
@@ -51,7 +51,7 @@ MonoBehaviour:
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
   ObservedComponents:
-  - {fileID: 114517262048593442}
+  - {fileID: 114623342042556514}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
@@ -84,17 +84,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114517262048593442
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1721748337056270}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8864f57d8707ac4dae0db761aa52255, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114585355796126056
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -117,6 +106,18 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
+--- !u!114 &114623342042556514
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1721748337056270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 497021434c266564c879b120b82d9f38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAvailable: 0
 --- !u!222 &222580578115554704
 CanvasRenderer:
   m_ObjectHideFlags: 1

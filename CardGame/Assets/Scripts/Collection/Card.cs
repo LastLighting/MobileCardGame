@@ -8,8 +8,8 @@ public class Card : MonoBehaviour {
     public string Id { get; set; }
     public string Name { get; set; }
     public int Strength { get; set; }
+    public bool isLeader { get; set; }
     
-
     public void changeSprite(int i)
     {
         gameObject.GetComponentInChildren<SpriteRenderer>().sprite = sprites[i];
