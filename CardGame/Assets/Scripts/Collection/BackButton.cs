@@ -22,6 +22,15 @@ public class BackButton : MonoBehaviour {
 
     public void OnMouseUp()
     {
-        SceneManager.LoadScene("MainMenu");
+        string currentScene = SceneManager.GetActiveScene().name;
+        if (currentScene == "GameLobby")
+        {
+            PhotonNetwork.CloseConnection(PhotonNetwork.player);  
+            SceneManager.LoadScene("MainMenu");
+        }
+        else
+        {
+            SceneManager.LoadScene("MainMenu");
+        }  
     }
 }
