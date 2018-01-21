@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,24 +23,19 @@ public class DeckBuild : MonoBehaviour {
 
     void Start () {
         StartCoroutine(getUserCollection());
-        DeckBean deckBean = new DeckBean();
-        User user = new User();
-        user.email = PlayerPrefs.GetString("LoginUser", "Unknown");
-        deckBean.user = user;
-        deckBean.name = PlayerPrefs.GetString("DeckName", "Unknown");
-        StartCoroutine(getUserDeck(deckBean));
+        
     }
 
     IEnumerator getUserDeck(DeckBean deckBean)
     {
         string jsonToServer = JsonUtility.ToJson(deckBean);
-        UnityWebRequest request = new UnityWebRequest("http://localhost:8080/deck/userDeck", "POST");
+        UnityWebRequest request = new UnityWebRequest("https://cardgamejavaserver.herokuapp.com/deck/userDeck", "POST");
         byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonToServer);
         request.uploadHandler = new UploadHandlerRaw(bodyRaw);
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
         yield return request.Send();
-        if (request.isError)
+        if (request.isNetworkError)
         {
             // todo обработать
         }
@@ -67,6 +63,20 @@ public class DeckBuild : MonoBehaviour {
             {
                 ItemList itemList = GameObject.Find("Item List").GetComponent<ItemList>();
                 itemList.AddToList(card.id, card.name, false);
+                Sprite sprite = GameObject.Find(card.id).transform.Find("Count").GetComponent<SpriteRenderer>().sprite;
+                if (sprite != null)
+                {
+                    if (Int32.Parse(sprite.name) == 1)
+                    {
+                        sprite = null;
+                        GameObject.Find(card.id).GetComponentInChildren<SpriteRenderer>().color = new Color32(100, 100, 100, 255);
+                    }
+                    else
+                    {
+                        sprite = Resources.Load("sprites/Cards/power/" + (Int32.Parse(sprite.name) - 1).ToString(), typeof(Sprite)) as Sprite;
+                    }
+                    GameObject.Find(card.id).transform.Find("Count").GetComponent<SpriteRenderer>().sprite = sprite;
+                }
             }
         }
     }
@@ -77,13 +87,13 @@ public class DeckBuild : MonoBehaviour {
         user.email = PlayerPrefs.GetString("LoginUser", "Unknown");
         Debug.Log(user.email);
         string jsonToServer = JsonUtility.ToJson(user);
-        UnityWebRequest request = new UnityWebRequest("http://localhost:8080/collection/userCards", "POST");
+        UnityWebRequest request = new UnityWebRequest("https://cardgamejavaserver.herokuapp.com/collection/userDeckCards", "POST");
         byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonToServer);
         request.uploadHandler = new UploadHandlerRaw(bodyRaw);
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
         yield return request.Send();
-        if (request.isError)
+        if (request.isNetworkError)
         {
             Debug.Log(request.error);
         }
@@ -136,7 +146,13 @@ public class DeckBuild : MonoBehaviour {
                     position.x = position.x + transformX;
                 }
                 count++;
-            }      
+            }
+            DeckBean deckBean = new DeckBean();
+            User findUser = new User();
+            findUser.email = PlayerPrefs.GetString("LoginUser", "Unknown");
+            deckBean.user = findUser;
+            deckBean.name = PlayerPrefs.GetString("DeckName", "Unknown");
+            StartCoroutine(getUserDeck(deckBean));
         }
     }
 }

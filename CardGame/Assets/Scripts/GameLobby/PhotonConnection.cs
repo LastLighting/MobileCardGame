@@ -33,7 +33,7 @@ public class PhotonConnection : Photon.MonoBehaviour
 	void OnJoinedLobby() 
 	{ 
 		PhotonNetwork.JoinOrCreateRoom("testRoom", new RoomOptions(), TypedLobby.Default);
-		PhotonNetwork.playerName = "nikita@mail.ru"; /*PlayerPrefs.GetString("LoginUser", "Unknown");*/
+		PhotonNetwork.playerName = PlayerPrefs.GetString("LoginUser", "Unknown");
 
 
 		/*var connectedRoom = PhotonNetwork.GetRoomList().ToList().FindAll(f => f.MaxPlayers > f.PlayerCount).FirstOrDefault();
@@ -57,7 +57,7 @@ public class PhotonConnection : Photon.MonoBehaviour
 		GameObject mineHand = PhotonNetwork.Instantiate("CardHand", new Vector3(0, -4.1f), transform.rotation, 0);
 		mineHand.gameObject.transform.parent = GameObject.Find("Canvas").transform;
 		mineHand.name = "CardHand" + PlayerPrefs.GetString("LoginUser", "Unknown");
-		if ( /*PlayerPrefs.GetString("LoginUser", "Unknown")*/ PhotonNetwork.player.UserId == PhotonNetwork.playerList[0].UserId)
+		if (PhotonNetwork.player.UserId == PhotonNetwork.playerList[0].UserId)
 		{
 			mineHand.GetComponent<HandPhoton>().isAvailable = false;
 		}
@@ -70,7 +70,7 @@ public class PhotonConnection : Photon.MonoBehaviour
 		mineDeck.transform.parent = GameObject.Find("NumberCanvas").transform;
 		
 		User user = new User();
-		user.email = "nikita@mail.ru"; /*PlayerPrefs.GetString("LoginUser", "Unknown");*/
+		user.email = PlayerPrefs.GetString("LoginUser", "Unknown");
 		
 		DeckBean deckBean = new DeckBean();
 		deckBean.user = user;
@@ -86,13 +86,13 @@ public class PhotonConnection : Photon.MonoBehaviour
 	IEnumerator getUserDeck(DeckBean deckBean)
 	{
 		string jsonToServer = JsonUtility.ToJson(deckBean);
-		UnityWebRequest request = new UnityWebRequest("http://localhost:8080/deck/userDeck", "POST");
+		UnityWebRequest request = new UnityWebRequest("https://cardgamejavaserver.herokuapp.com/deck/userDeck", "POST");
 		byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonToServer);
 		request.uploadHandler = new UploadHandlerRaw(bodyRaw);
 		request.downloadHandler = new DownloadHandlerBuffer();
 		request.SetRequestHeader("Content-Type", "application/json");
 		yield return request.Send();
-		if (!request.isError)
+		if (!request.isNetworkError)
 		{            
 			DeckBean deck = JsonUtility.FromJson<DeckBean>(request.downloadHandler.text);
 			Vector3 pos = transform.position;

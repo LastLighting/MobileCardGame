@@ -98,13 +98,13 @@ public class SingUpButton : MonoBehaviour {
 	IEnumerator serverRegistration(User user)
 	{
 		string jsonToServer = JsonUtility.ToJson(user);
-		UnityWebRequest request = new UnityWebRequest("http://localhost:8080/user/registration", "POST");
+		UnityWebRequest request = new UnityWebRequest("https://cardgamejavaserver.herokuapp.com/user/registration", "POST");
 		byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonToServer);
 		request.uploadHandler = new UploadHandlerRaw(bodyRaw);
 		request.downloadHandler = new DownloadHandlerBuffer();
 		request.SetRequestHeader("Content-Type", "application/json");
 		yield return request.Send(); 
-		if(request.isError) {
+		if(request.isNetworkError) {
 			singUpText.text = "Регистрация отменена. Ошибка сервера";
 		}
 	}

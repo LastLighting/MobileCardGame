@@ -26,11 +26,11 @@ public class Collection : MonoBehaviour
 
     IEnumerator getCollection()
     {
-        UnityWebRequest request = new UnityWebRequest("http://localhost:8080/collection/cards", "POST");
+        UnityWebRequest request = new UnityWebRequest("https://cardgamejavaserver.herokuapp.com/collection/cards", "POST");
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
         yield return request.Send();
-        if (request.isError)
+        if (request.isNetworkError)
         {
             Debug.Log(request.error);
         }
@@ -79,13 +79,13 @@ public class Collection : MonoBehaviour
         User user = new User();
         user.email = PlayerPrefs.GetString("LoginUser", "Unknown"); ;
         string jsonToServer = JsonUtility.ToJson(user);
-        UnityWebRequest request = new UnityWebRequest("http://localhost:8080/collection/userCards", "POST");
+        UnityWebRequest request = new UnityWebRequest("https://cardgamejavaserver.herokuapp.com/collection/userCards", "POST");
         byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonToServer);
         request.uploadHandler = new UploadHandlerRaw(bodyRaw);
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
         yield return request.Send();
-        if (request.isError)
+        if (request.isNetworkError)
         {
             Debug.Log(request.error);
         }

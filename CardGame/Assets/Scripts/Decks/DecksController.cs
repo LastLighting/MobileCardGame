@@ -43,13 +43,13 @@ public class DecksController : MonoBehaviour
     IEnumerator createNewDeck(DeckBean deckBean)
     {
         string jsonToServer = JsonUtility.ToJson(deckBean);
-        UnityWebRequest request = new UnityWebRequest("http://localhost:8080/deck/create", "POST");
+        UnityWebRequest request = new UnityWebRequest("https://cardgamejavaserver.herokuapp.com/deck/create", "POST");
         byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonToServer);
         request.uploadHandler = new UploadHandlerRaw(bodyRaw);
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
         yield return request.Send(); 
-        if(request.isError) {
+        if(request.isNetworkError) {
             // todo обработать
         }
         else
@@ -62,15 +62,15 @@ public class DecksController : MonoBehaviour
     IEnumerator getUserDecks()
     {
         User user = new User();
-        user.email = "nikita@mail.ru"; /*PlayerPrefs.GetString("LoginUser", "Unknown");*/
+        user.email = PlayerPrefs.GetString("LoginUser", "Unknown");
         string jsonToServer = JsonUtility.ToJson(user);
-        UnityWebRequest request = new UnityWebRequest("http://localhost:8080/deck/list", "POST");
+        UnityWebRequest request = new UnityWebRequest("https://cardgamejavaserver.herokuapp.com/deck/list", "POST");
         byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonToServer);
         request.uploadHandler = new UploadHandlerRaw(bodyRaw);
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
         yield return request.Send();
-        if (request.isError)
+        if (request.isNetworkError)
         {
             Debug.Log(request.error);
         }
@@ -109,11 +109,11 @@ public class DecksController : MonoBehaviour
 
     IEnumerator getLeader()
     {
-        UnityWebRequest request = new UnityWebRequest("http://localhost:8080/deck/leaderCards", "POST");
+        UnityWebRequest request = new UnityWebRequest("https://cardgamejavaserver.herokuapp.com/deck/leaderCards", "POST");
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
         yield return request.Send();
-        if (request.isError)
+        if (request.isNetworkError)
         {
             Debug.Log(request.error);
         }

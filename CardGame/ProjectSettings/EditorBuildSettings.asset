@@ -5,16 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scene/Login.unity
     guid: 48ed9218e651a6f4391855a5e3fd1b2f
-  - enabled: 0
+  - enabled: 1
+    path: Assets/Scene/MainMenu.unity
+    guid: 8108084648bc5454a82a93e7086f7895
+  - enabled: 1
     path: Assets/Scene/Collection.unity
     guid: 3c79eb53504c4ac4797c17feee73637d
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scene/Deck.unity
     guid: 08335b435198d98479811b2e3b3cebe6
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scene/DeckBuild.unity
     guid: aaf49d38e8127d44e9714bc7e32b1b24
   - enabled: 1
@@ -23,6 +26,3 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scene/GameLobby.unity
     guid: c03e13d81a14389468df0e79bdcead70
-  - enabled: 1
-    path: Assets/Scene/MainMenu.unity
-    guid: 8108084648bc5454a82a93e7086f7895

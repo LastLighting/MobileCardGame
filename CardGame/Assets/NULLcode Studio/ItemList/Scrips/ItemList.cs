@@ -73,6 +73,17 @@ public class ItemList : MonoBehaviour {
             {
                 if (item.count.text == "2")
                 {
+                    Sprite sprite = GameObject.Find(item.id).transform.Find("Count").GetComponent<SpriteRenderer>().sprite;
+                    if (sprite == null)
+                    {
+                        sprite = Resources.Load("sprites/Cards/power/" + 1, typeof(Sprite)) as Sprite;
+                        GameObject.Find(item.id).GetComponentInChildren<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
+                    }
+                    else
+                    {
+                        sprite = Resources.Load("sprites/Cards/power/" + (Int32.Parse(sprite.name) + 1).ToString(), typeof(Sprite)) as Sprite;
+                    }
+                    GameObject.Find(item.id).transform.Find("Count").GetComponent<SpriteRenderer>().sprite = sprite;
                     item.count.text = null;
                     find = true;
                 }                      
@@ -100,6 +111,17 @@ public class ItemList : MonoBehaviour {
             }
             scroll.verticalNormalizedPosition = vPos; // возвращаем позицию скролла
             ButtonRemoved(index, title); // вывод конечной информации
+            Sprite sprite = GameObject.Find(item.id).transform.Find("Count").GetComponent<SpriteRenderer>().sprite;
+            if(sprite == null)
+            {
+                sprite = Resources.Load("sprites/Cards/power/" + 1, typeof(Sprite)) as Sprite;
+                GameObject.Find(item.id).GetComponentInChildren<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
+            }
+            else
+            {
+                sprite = Resources.Load("sprites/Cards/power/" + (Int32.Parse(sprite.name) + 1).ToString(), typeof(Sprite)) as Sprite;
+            }
+            GameObject.Find(item.id).transform.Find("Count").GetComponent<SpriteRenderer>().sprite = sprite;
         }   
 	}
 

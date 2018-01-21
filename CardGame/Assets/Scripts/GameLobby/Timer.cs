@@ -9,14 +9,24 @@ public class Timer : MonoBehaviour
 	public Text time;
 	HandPhoton hand;
 	bool lastAvailable;
-
+    int count = 0;
 	void Update()
 	{
 		if (PhotonNetwork.playerList.Length == 2)
 		{
 			hand = GameObject.Find("CardHand" + PlayerPrefs.GetString("LoginUser", "Unknown")).GetComponent<HandPhoton>();
-			
-			timeRamaining -= Time.deltaTime;
+            if (count == 0)
+            {
+                if (hand.isAvailable)
+                {
+                    StartCoroutine(yourStep());                   
+                }
+                else
+                {
+                    StartCoroutine(enemyStep());
+                }
+            }
+                timeRamaining -= Time.deltaTime;
 			time.text = ((int) timeRamaining).ToString();
 			
 			if ((timeRamaining <= 0) && (hand.isAvailable))
@@ -28,7 +38,8 @@ public class Timer : MonoBehaviour
 			{
 				if (!lastAvailable)
 				{
-					timeRamaining = 60;
+                    StartCoroutine(yourStep());
+                    timeRamaining = 60;
 				}
 				lastAvailable = hand.isAvailable;
 			}
@@ -36,7 +47,8 @@ public class Timer : MonoBehaviour
 			{
 				if (lastAvailable)
 				{
-					timeRamaining = 60;
+                    StartCoroutine(enemyStep());
+                    timeRamaining = 60;
 				}
 				lastAvailable = hand.isAvailable;
 			}
@@ -44,4 +56,18 @@ public class Timer : MonoBehaviour
 			
 		}
 	}
+
+    IEnumerator yourStep()
+    {
+        GameObject.Find("Modal").transform.GetChild(1).gameObject.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        GameObject.Find("Modal").transform.GetChild(1).gameObject.SetActive(false);
+    }
+
+    IEnumerator enemyStep()
+    {
+        GameObject.Find("Modal").transform.GetChild(2).gameObject.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        GameObject.Find("Modal").transform.GetChild(2).gameObject.SetActive(false);
+    }
 }
