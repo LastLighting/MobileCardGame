@@ -10,6 +10,7 @@ public class Timer : MonoBehaviour
 	HandPhoton hand;
 	bool lastAvailable;
     int count = 0;
+    bool start = false;
 	void Update()
 	{
 		if (PhotonNetwork.playerList.Length == 2)
@@ -19,12 +20,19 @@ public class Timer : MonoBehaviour
             {
                 if (hand.isAvailable)
                 {
-                    StartCoroutine(yourStep());                   
+                    if (!start)
+                    {
+                        StartCoroutine(yourStep());
+                    }                             
                 }
                 else
                 {
-                    StartCoroutine(enemyStep());
+                    if (!start)
+                    {
+                        StartCoroutine(enemyStep());
+                    }
                 }
+                count++;
             }
                 timeRamaining -= Time.deltaTime;
 			time.text = ((int) timeRamaining).ToString();
@@ -38,7 +46,10 @@ public class Timer : MonoBehaviour
 			{
 				if (!lastAvailable)
 				{
-                    StartCoroutine(yourStep());
+                    if (!start)
+                    {
+                        StartCoroutine(yourStep());
+                    }
                     timeRamaining = 60;
 				}
 				lastAvailable = hand.isAvailable;
@@ -47,27 +58,32 @@ public class Timer : MonoBehaviour
 			{
 				if (lastAvailable)
 				{
-                    StartCoroutine(enemyStep());
+                    if (!start)
+                    {
+                        StartCoroutine(enemyStep());
+                    }
                     timeRamaining = 60;
 				}
 				lastAvailable = hand.isAvailable;
-			}
-			
-			
+			}			
 		}
 	}
 
     IEnumerator yourStep()
     {
+        start = true;
         GameObject.Find("Modal").transform.GetChild(1).gameObject.SetActive(true);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.2f);
         GameObject.Find("Modal").transform.GetChild(1).gameObject.SetActive(false);
+        start = false;
     }
 
     IEnumerator enemyStep()
     {
+        start = true;
         GameObject.Find("Modal").transform.GetChild(2).gameObject.SetActive(true);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.2f);
         GameObject.Find("Modal").transform.GetChild(2).gameObject.SetActive(false);
+        start = false;
     }
 }

@@ -64,6 +64,11 @@ public class LoginButton : MonoBehaviour {
                     loginText.text = "Неправильный адрес электронной почты";
                 }
                 else
+                if (err.Contains("The password is invalid"))
+                {
+                    loginText.text = "Неправильный пароль";
+                }
+                else
                     loginText.text = "" + task.Exception.InnerExceptions[0].Message;
                 blur.SetActive(true);
                 modal.SetActive(true);
